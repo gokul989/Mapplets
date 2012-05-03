@@ -1,0 +1,125 @@
+<html>
+<head>
+	<title>Wayfinding</title>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+	
+<style type="text/css" media="screen">
+
+	#container {
+		width: 480px;
+		height: 720px;
+		border: 1px solid black;
+	}
+	
+	#map {
+		width: 100%;
+		height: 640px;
+	}
+	
+	#buttons {
+		background-color: grey;
+		width: 100%;
+		height: 80px;
+	}
+	
+	body {
+		margin: 0px;
+	}
+	
+	.button {
+		font-size: 1.2em;
+		width: 239px;
+		background-color: white;
+		float: left;
+		height: 60px;
+		
+		text-align: center;
+		padding-top: 20px;
+		
+		font-family: Verdana, sans-serif;
+		font-size: 2em;
+		font-weight: bold;
+	}
+	
+	#pair_button {
+		border-left: 2px solid black;
+	}
+	
+	.click {
+		background-color: blue;
+	}
+
+</style>
+
+<script type="text/javascript" src="jquery.min.js">
+</script>
+
+<script type="text/javascript"
+   src="http://maps.google.com/maps/api/js?sensor=false">
+</script>
+
+<script type="text/javascript">
+
+  function initialize() {
+	
+    var latlng = new google.maps.LatLng(18.5299913, 73.856492);
+    var myOptions = {
+      zoom: 15,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("map"),
+        myOptions);
+	
+	var marker = new google.maps.Marker({
+	        position: latlng, 
+	        map: map,
+	        title:"You Are Here"
+	    });
+		
+  }
+
+	function button(id, eventType) {
+		if(eventType=="down") {
+			$("#" + id).addClass("click");
+		} else if (eventType=="click") {
+			$("#" + id).removeClass("click");
+			if(id=="make_button")
+				{
+						window.location.href = "final.html";
+				}
+			else
+				{
+					alert("Paired with your friend!");
+			   }	
+			console.log("Button was clicked!");
+		}
+	}
+
+	
+</script>
+</head>
+
+<body onload="initialize();">
+
+<div id="container">
+
+<div id="map">
+</div>
+
+<div id="buttons">
+
+<div id="make_button" class="button" onclick="button('make_button', 'click');" onmousedown="button('make_button', 'down')">
+Make A Map
+</div>
+
+<div id="pair_button" class="button" onclick="button('pair_button', 'click');" onmousedown="button('pair_button', 'down')">
+Pair Device
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
